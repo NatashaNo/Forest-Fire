@@ -2600,6 +2600,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ShootWaterGun",
+            "id": "4ff87724-70bb-4fb7-a96c-3eb24bdf05d7",
+            "actions": [
+                {
+                    "name": "TriggerGun",
+                    "type": "Button",
+                    "id": "150d5f17-4074-4b43-b101-e6db6b8fa91d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "487a344b-6962-4596-a55d-85a9d7438135",
+                    "path": "<Keyboard>/#(T)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TriggerGun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ca4733a-c496-4581-a76a-826a7fd099db",
+                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TriggerGun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

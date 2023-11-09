@@ -17,12 +17,14 @@ public class ForestFireCell : MonoBehaviour
         Alight,
         Rock,
         Burnt,
+        Well,
     }
 
     public int cellFuel; // integer to store the amount of fuel in the cell
 
     // references to materials used for visual appearance
     public Material groundMaterialBurnt;
+    public Material wellGroundMaterial;
     public Material groundMaterialGrass;
     public Material groundMaterialRock;
     public Material groundMaterialTree;
@@ -31,6 +33,8 @@ public class ForestFireCell : MonoBehaviour
     public GameObject treeObject; // reference to tree visual object
     public GameObject leaves; // reference to leaves visual object
     public GameObject rockObject; // reference to rock visual object
+    public GameObject wellObject;
+    public GameObject waterGun;
 
     public GameObject treeFireFVX; // reference to tree fire vfx
     public GameObject grassFireFVX; // reference to grass fire vfx
@@ -87,6 +91,8 @@ public class ForestFireCell : MonoBehaviour
     // so we can check to see if the tree has material has been set aleady and skip changing it again to save on performance
     public void SetTree()
     {
+     //   Debug.Log("tree");
+
         if (groundMeshRenderer.sharedMaterial == groundMaterialTree)
             return;
 
@@ -97,12 +103,25 @@ public class ForestFireCell : MonoBehaviour
         leaves.SetActive(true);
         treeObject.SetActive(true);
     }
+    public void SetWell()
+    {
+        if (groundMeshRenderer.sharedMaterial == wellGroundMaterial)
+            return;
 
+        // this code below wont run once the well material has been set
+        ResetCell();
+        cellState = State.Well;
+        groundMeshRenderer.material = wellGroundMaterial; // sets the cell material to rock
+        wellObject.SetActive(true);
+
+    }
     // change cell state to grass    
     // a grass cell will never go back to grass from another state 
     // so we can check to see if the grass has material has been set aleady and skip changing it again to save on performance
     public void SetGrass()
     {
+       //Debug.Log("Grass");
+
         if (groundMeshRenderer.sharedMaterial == groundMaterialGrass)
             return;
 
@@ -123,14 +142,15 @@ public class ForestFireCell : MonoBehaviour
         // this code below wont run once the rock material has been set
         ResetCell();
         cellState = State.Rock;
-        cellFuel = 0;
         groundMeshRenderer.material = groundMaterialRock; // sets the cell material to rock
-        rockObject.SetActive(true); 
+        rockObject.SetActive(true);
+        Debug.Log(rockObject.name);
     }
 
     // set cell alight
     public void SetAlight()
     {
+      
         cellState = State.Alight;
 
         // check if a fire has assigned 

@@ -15,6 +15,7 @@ public class ForestFire3D : MonoBehaviour
 
     public int rockChance; // the percentage chance a cell is assigned as rock
     public int grassChance; // the percentage chance a cell is assigned as grass
+    public int wellChance; // the percentage chance a cell is assigned as well
 
     public GameObject cellPrefab; // gameobject prefab used to represent a cell on the grid   
 
@@ -112,20 +113,33 @@ public class ForestFire3D : MonoBehaviour
             {
                 xC = UnityEngine.Random.Range(0, 100); // generate a random number between 0 and 100
 
-                if (xC < rockChance) // if the random value is less than rock chance, assign cell as rock
-                {                   
+                if (xC >= 90 && xC <= 100 ) // if the random value is less than rock chance, assign cell as rock
+                {
                     forestFireCells[xCount, yCount].SetRock();
+                    Debug.Log("kk");
                 }
-                else if (xC < grassChance) // if the random value is less than grass chance, assign cell as grass and set cell fuel
+                else if (xC >= 80 && xC < 90) // if the random value is less than grass chance, assign cell as grass and set cell fuel
                 {
                     forestFireCells[xCount, yCount].SetGrass();
                     forestFireCells[xCount, yCount].cellFuel = UnityEngine.Random.Range(1, 5);
+                }
+                else if (xC >= 79 && xC < 80) // if the random value is less than grass chance, assign cell as grass and set cell fuel
+                {
+                   
+                    /*
+                    * Debug.Log(xC.ToString());
+                     *Debug.Log(xCount + ":" + yCount);
+                    */
+                    forestFireCells[xCount, yCount].SetWell();
+                    forestFireCells[xCount, yCount].cellFuel = 0;
                 }
                 else // if the random value is higher than rock and grass chance, assign as tree and set cell fuel
                 {
                     forestFireCells[xCount, yCount].SetTree();
                     forestFireCells[xCount, yCount].cellFuel = UnityEngine.Random.Range(15, 25);
                 }
+
+
             }
         }
 
