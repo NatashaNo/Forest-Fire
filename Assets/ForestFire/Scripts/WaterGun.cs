@@ -11,36 +11,83 @@ public class WaterGun : MonoBehaviour
     public float maximumWater;
     public float currentWater;
     public float flowAmountPerSecond;
+
     public AudioSource soundWhenPressingTheTrigger;
-    public Slider waterSlider;
+    public AudioSource soundWhenRefilling;
+
     public ParticleSystem bubblesParticle;
-    //public AudioSource soundWhenRefilling;
+
+    public Slider waterSlider;
+    public Image fillImage;
+    public Color maxColor = Color.blue;
+    public Color yellowColor = Color.yellow;
+    public Color redColor = Color.red;
+    public float yellowThreshold = 50f;
+    public float redThreshold = 20f;
+
+    public GameObject[] wells;
+
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        waterSlider.maxValue = maximumWater;
+        currentWater = maximumWater;
+        Debug.Log("The starting health of the player is:    " + currentWater);
+
+        currentWater = maximumWater;
+        Debug.Log("The current tank is " + currentWater);
+
+        wells = GameObject.FindGameObjectsWithTag("Well");
+
+        for (int i = 0; i < wells.Length; i++)
+        {
+            wells[i].GetComponent<Well>().waterGun = this;
+        }
+
+        if (waterSlider == null)
+        {
+            waterSlider = GetComponent<Slider>();
+        }
+        if (fillImage == null)
+        {
+            fillImage = waterSlider.fillRect.GetComponent<Image>();
+        }
+        soundWhenRefilling = GetComponent<AudioSource>();
+
         if (waterSlider == null)
         {
             Debug.LogError("WaterGun Slider not set!");
         }
 
-        waterSlider.maxValue = maximumWater;
-        currentWater = maximumWater;
-        Debug.Log("The starting health of the player is:    " + currentWater);
 
+    }
+    void UpdateSliderColor()
+    {
+        float waterSliderValue = waterSlider.value;
 
-        currentWater = maximumWater;
-        Debug.Log  ("The current tank is " + currentWater);
-
+        if (waterSliderValue >= yellowThreshold)
+        {
+            fillImage.color = maxColor;
+        }
+        else if (waterSliderValue >= redThreshold)
+        {
+            fillImage.color = yellowColor;
+        }
+        else
+        {
+            fillImage.color = redColor;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        waterSlider.value = currentWater;   
+        UpdateSliderColor();
+
+        waterSlider.value = currentWater;
 
         if (waterReference.action.IsPressed())
         {
@@ -56,7 +103,7 @@ public class WaterGun : MonoBehaviour
                 currentWater -= flowAmountPerSecond * Time.deltaTime;
                 Debug.Log("Shooting Water!");
 
-                if(bubblesParticle.isPlaying == false)
+                if (bubblesParticle.isPlaying == false)
                 {
                     bubblesParticle.Play();
                     Debug.Log("Trigger pressed, bubbles on");
@@ -74,15 +121,16 @@ public class WaterGun : MonoBehaviour
                     currentWater = 0;
                     StopBubbles();
                 }
-               
+
             }
         }
         else
         {
             StopBubbles();
-            
+
         }
     }
+  
 
     private void StopBubbles()
     {
@@ -98,8 +146,22 @@ public class WaterGun : MonoBehaviour
             Debug.Log("Trigger released, sound is off");
         }
     }
-
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("Collision detected");
+    //    if (other.CompareTag("Well"))
+    //    {
+    //        soundWhenRefilling.Play();
+    //        Debug.Log("Well trigger detected");
+    //    }
+    //}
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Well"))
+    //    {
+    //        soundWhenRefilling.Stop();
+    //    }
+    //}
 }
 
 
-  

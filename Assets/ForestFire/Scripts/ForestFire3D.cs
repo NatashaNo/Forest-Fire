@@ -43,7 +43,7 @@ public class ForestFire3D : MonoBehaviour
     {
         CreateGrid(gridSizeX, gridSizeY);
         RandomiseGrid();
-        PauseGame(true);
+        //PauseGame(true);
         UpdateGridVisuals();
     }
 
@@ -104,8 +104,8 @@ public class ForestFire3D : MonoBehaviour
 
     private void RandomiseGrid()
     {
-        nlight = 2; // how many trees to set on fire
-                      // iterate through every cell in the cell in the grid and set its state to dead, decide what type of object is present and if flammable assign an amount of fuel
+        //nlight = 2; // how many trees to set on fire
+        //              // iterate through every cell in the cell in the grid and set its state to dead, decide what type of object is present and if flammable assign an amount of fuel
 
         for (int xCount = 0; xCount < gridSizeX; xCount++)
         {
