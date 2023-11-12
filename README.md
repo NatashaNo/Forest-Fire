@@ -20,8 +20,14 @@ git clone https://github.com/yourusername/ForestFire.git
 ```
 
 ## Gameplay Preview
+https://www.youtube.com/watch?v=tNNoq1AlcV4
 
 ## Screenshots
+![Screenshot 2023-11-12 120512](https://github.com/NatashaNo/Forest-Fire/assets/147525329/e290daff-0aa7-45c6-99e4-ec1fe6289bc8)
+![Screenshot 2023-11-12 120553](https://github.com/NatashaNo/Forest-Fire/assets/147525329/e33aaec8-eccd-43a1-b8fe-a84ab8428084)
+![Screenshot 2023-11-12 120438](https://github.com/NatashaNo/Forest-Fire/assets/147525329/37926ca8-2109-4f44-9e53-cf995cac4cd8)
+![Screenshot 2023-11-12 120407](https://github.com/NatashaNo/Forest-Fire/assets/147525329/e4969da4-1e43-4e10-8a84-b443dc353be4)
+
 
 ## License
 This project is not licensed at the moment.
